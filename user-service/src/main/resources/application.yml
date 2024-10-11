@@ -1,13 +1,24 @@
 server:
-  port: 0 # ???? ?????.
+  port: 0
 spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/cloud
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
   application:
     name: user-service
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
 eureka:
   instance:
-    instance-id: ${spring.cloud.client.hostname}:${spring.application.name:${random.value}}
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance.id:${random.value}}
   client:
     register-with-eureka: true
-    fetch-registry: true # ??? ????? ????? ??? ????? ??? ???? ???? ??
+    fetch-registry: true
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
+test:
+  message: welcome
